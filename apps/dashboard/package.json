@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@loft/dashboard",
+  "name": "@horizon/dashboard",
   "version": "0.0.0",
   "type": "module",
   "dependencies": {

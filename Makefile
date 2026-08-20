@@ -1,4 +1,4 @@
-project_name := loft-horizon
+project_name := horizon
 
 image_base := loft-orbital/$(project_name)
 dev_image_url := $(image_base)/dev

@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@loft/horizon",
-  "description": "Loft Horizon - web application for managing a satellite company fleet.",
+  "description": "Horizon - web application for managing a satellite company fleet.",
   "version": "0.0.0",
   "workspaces": [
     "apps/*"

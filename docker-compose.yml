@@ -2,8 +2,8 @@ version: "3.8"
 
 services:
   loft-horizon:
-    image: loft-orbital/loft-horizon/dev
-    container_name: loft-horizon-dev
+    image: loft-orbital/horizon/dev
+    container_name: horizon-dev
     ports:
       - 3000:3000 # Server access port
       - 8080:8080 # Dashboard access port
