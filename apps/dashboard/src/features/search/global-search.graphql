@@ -1,0 +1,44 @@
+query GlobalSearch {
+  allSatellites {
+    id
+    name
+    status
+    manufacturer
+  }
+  allGroundStations {
+    id
+    name
+    status
+    network
+  }
+  allPayloads {
+    id
+    name
+    status
+    category
+  }
+  allCustomers {
+    id
+    name
+    email
+  }
+  allContacts {
+    id
+    date
+    type
+    Satellite {
+      id
+      name
+    }
+    GroundStation {
+      id
+      name
+    }
+  }
+  allReports {
+    id
+    title
+    type
+    date
+  }
+}

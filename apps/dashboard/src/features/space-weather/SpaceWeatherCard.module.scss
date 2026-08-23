@@ -1,0 +1,104 @@
+.content {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.value {
+  color: var(--color-text);
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.value small {
+  margin-left: var(--space-1);
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.copy {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  align-items: center;
+  min-width: 0;
+}
+
+.observed {
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.rule {
+  flex-shrink: 0;
+  width: 1px;
+  height: 0.75rem;
+  background: var(--color-hairline);
+}
+
+.source {
+  display: inline-flex;
+  gap: 0.25rem;
+  align-items: center;
+  padding: 0.12rem 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-glass);
+  color: var(--color-accent-hover);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  text-decoration: none;
+  transition:
+    border-color 120ms ease,
+    background 120ms ease;
+}
+
+.source:hover {
+  border-color: var(--color-accent-mid);
+  background: var(--color-accent-soft);
+}
+
+.source-icon {
+  display: block;
+  flex-shrink: 0;
+  width: 0.8rem;
+  height: 0.8rem;
+  overflow: visible;
+}
+
+.stale {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.error {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.error p {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+@media (width <= 42rem) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+}

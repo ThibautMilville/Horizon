@@ -1,0 +1,81 @@
+query ReportList {
+  allReports {
+    id
+    title
+    type
+    date
+    satellite_id
+    groundStation_id
+    Satellite {
+      id
+      name
+    }
+    GroundStation {
+      id
+      name
+    }
+  }
+}
+
+query ReportDetail($id: ID!) {
+  Report(id: $id) {
+    id
+    title
+    type
+    date
+    content
+    satellite_id
+    groundStation_id
+    employee_id
+    Satellite {
+      id
+      name
+    }
+    GroundStation {
+      id
+      name
+    }
+    Employee {
+      id
+      name
+    }
+  }
+  allComments(filter: {report_id: $id}) {
+    id
+    date
+    content
+    employee_id
+    Employee {
+      id
+      name
+    }
+  }
+}
+
+mutation CreateReport(
+  $type: String!
+  $date: Date!
+  $title: String!
+  $content: String!
+  $employee_id: ID!
+  $satellite_id: ID
+  $groundStation_id: ID
+) {
+  createReport(
+    type: $type
+    date: $date
+    title: $title
+    content: $content
+    employee_id: $employee_id
+    satellite_id: $satellite_id
+    groundStation_id: $groundStation_id
+  ) {
+    id
+  }
+}
+
+mutation CreateComment($date: Date!, $content: String!, $report_id: ID!, $employee_id: ID!) {
+  createComment(date: $date, content: $content, report_id: $report_id, employee_id: $employee_id) {
+    id
+  }
+}
