@@ -1,0 +1,36 @@
+query FleetOverview {
+  allSatellites {
+    id
+    name
+    status
+  }
+  allGroundStations {
+    id
+    name
+    status
+    network
+  }
+  allPayloads {
+    id
+    status
+  }
+  allContacts {
+    id
+    date
+  }
+  allReports {
+    id
+    title
+    type
+    date
+  }
+  _allSatellitesMeta {
+    count
+  }
+  _allGroundStationsMeta {
+    count
+  }
+  _allPayloadsMeta {
+    count
+  }
+}
