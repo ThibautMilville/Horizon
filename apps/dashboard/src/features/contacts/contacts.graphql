@@ -1,0 +1,97 @@
+query ContactList {
+  allContacts {
+    id
+    date
+    type
+    satellite_id
+    groundStation_id
+    Satellite {
+      id
+      name
+    }
+    GroundStation {
+      id
+      name
+    }
+  }
+}
+
+query ContactDetail($id: ID!) {
+  Contact(id: $id) {
+    id
+    date
+    type
+    executionScript
+    configuration
+    satellite_id
+    groundStation_id
+    payload_id
+    employee_id
+    Satellite {
+      id
+      name
+    }
+    GroundStation {
+      id
+      name
+    }
+    Payload {
+      id
+      name
+    }
+    Employee {
+      id
+      name
+    }
+  }
+}
+
+mutation CreateContact(
+  $date: Date!
+  $type: String!
+  $executionScript: String!
+  $configuration: JSON!
+  $groundStation_id: ID!
+  $satellite_id: ID!
+  $payload_id: ID
+  $employee_id: ID!
+) {
+  createContact(
+    date: $date
+    type: $type
+    executionScript: $executionScript
+    configuration: $configuration
+    groundStation_id: $groundStation_id
+    satellite_id: $satellite_id
+    payload_id: $payload_id
+    employee_id: $employee_id
+  ) {
+    id
+  }
+}
+
+mutation UpdateContact(
+  $id: ID!
+  $date: Date
+  $type: String
+  $executionScript: String
+  $configuration: JSON
+  $groundStation_id: ID
+  $satellite_id: ID
+  $payload_id: ID
+  $employee_id: ID
+) {
+  updateContact(
+    id: $id
+    date: $date
+    type: $type
+    executionScript: $executionScript
+    configuration: $configuration
+    groundStation_id: $groundStation_id
+    satellite_id: $satellite_id
+    payload_id: $payload_id
+    employee_id: $employee_id
+  ) {
+    id
+  }
+}

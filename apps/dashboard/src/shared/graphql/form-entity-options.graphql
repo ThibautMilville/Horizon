@@ -1,0 +1,19 @@
+query FormEntityOptions {
+  allSatellites {
+    id
+    name
+  }
+  allGroundStations {
+    id
+    name
+  }
+  allEmployees {
+    id
+    name
+  }
+  allPayloads {
+    id
+    name
+    satellite_id
+  }
+}
