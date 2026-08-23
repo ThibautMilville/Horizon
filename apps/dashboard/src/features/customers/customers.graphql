@@ -1,0 +1,39 @@
+query CustomerList {
+  allCustomers {
+    id
+    name
+    email
+    employee_id
+    Employee {
+      id
+      name
+      email
+      role
+    }
+  }
+}
+
+query CustomerDetail($id: ID!) {
+  Customer(id: $id) {
+    id
+    name
+    email
+    employee_id
+    Employee {
+      id
+      name
+      email
+      role
+    }
+  }
+  allPayloads(filter: {customer_id: $id}) {
+    id
+    name
+    status
+    category
+    Satellite {
+      id
+      name
+    }
+  }
+}

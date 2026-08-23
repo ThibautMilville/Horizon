@@ -1,0 +1,47 @@
+query PayloadList {
+  allPayloads {
+    id
+    name
+    status
+    category
+    satellite_id
+    customer_id
+    Satellite {
+      id
+      name
+    }
+    Customer {
+      id
+      name
+    }
+  }
+  allSatellites {
+    id
+    name
+  }
+  allCustomers {
+    id
+    name
+  }
+}
+
+query PayloadDetail($id: ID!) {
+  Payload(id: $id) {
+    id
+    name
+    description
+    status
+    category
+    configuration
+    satellite_id
+    customer_id
+    Satellite {
+      id
+      name
+    }
+    Customer {
+      id
+      name
+    }
+  }
+}
