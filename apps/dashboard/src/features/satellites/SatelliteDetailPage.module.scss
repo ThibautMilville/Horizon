@@ -1,0 +1,14 @@
+.copy {
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.tle {
+  margin: 0;
+  overflow-x: auto;
+  color: var(--color-text-muted);
+  font-family: ui-monospace, monospace;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  white-space: pre;
+}

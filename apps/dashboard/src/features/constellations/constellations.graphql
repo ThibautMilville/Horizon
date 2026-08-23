@@ -1,0 +1,19 @@
+query ConstellationOverview {
+  allConstellations {
+    id
+    name
+    description
+  }
+  allSatellites {
+    id
+    name
+    status
+    altitude
+    constellation_id
+  }
+  allPayloads {
+    id
+    status
+    satellite_id
+  }
+}

@@ -1,0 +1,45 @@
+query SatelliteList {
+  allSatellites {
+    id
+    name
+    status
+    manufacturer
+    busType
+    image
+  }
+}
+
+query SatelliteDetail($id: ID!) {
+  Satellite(id: $id) {
+    id
+    name
+    description
+    status
+    manufacturer
+    busType
+    image
+    coordinates
+    altitude
+    specs
+    tle
+    Launch {
+      id
+      date
+      provider
+      status
+      outcome
+      rocket
+    }
+    Constellation {
+      id
+      name
+    }
+  }
+  allPayloads(filter: {satellite_id: $id}) {
+    id
+    name
+    description
+    category
+    status
+  }
+}

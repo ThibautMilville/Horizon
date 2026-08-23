@@ -1,0 +1,35 @@
+query StationList {
+  allGroundStations {
+    id
+    name
+    status
+    network
+    image
+  }
+}
+
+query StationDetail($id: ID!) {
+  GroundStation(id: $id) {
+    id
+    name
+    image
+    coordinates
+    network
+    status
+  }
+  allContacts(filter: {groundStation_id: $id}) {
+    id
+    date
+    type
+    Satellite {
+      id
+      name
+    }
+  }
+  allReports(filter: {groundStation_id: $id}) {
+    id
+    date
+    title
+    type
+  }
+}
