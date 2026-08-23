@@ -1,0 +1,133 @@
+.bar {
+  position: absolute;
+  z-index: 1250;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  border-top: 1px solid rgb(255 255 255 / 10%);
+  background: rgb(6 8 12 / 92%);
+  backdrop-filter: blur(12px);
+  pointer-events: none;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 240ms ease;
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateY(110%);
+}
+
+.row {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  justify-content: space-between;
+  min-height: 1.85rem;
+  padding: 0.35rem 0.85rem;
+}
+
+.row + .row {
+  border-top: 1px solid rgb(255 255 255 / 8%);
+}
+
+.cluster {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  align-items: center;
+  min-width: 0;
+}
+
+.rule {
+  width: 1px;
+  height: 0.85rem;
+  background: rgb(255 255 255 / 14%);
+}
+
+.meta {
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.cursor,
+.hint {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.hint {
+  color: var(--color-text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.glyph {
+  flex: 0 0 auto;
+  color: var(--color-text-muted);
+}
+
+.live {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: var(--color-ok);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-ok) 20%, transparent);
+}
+
+.clock {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.pill,
+.pill-muted {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.35rem;
+  padding: 0 0.55rem;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: var(--radius-sm);
+  background: rgb(255 255 255 / 4%);
+  color: var(--color-text);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.pill-muted {
+  color: var(--color-text-muted);
+}
+
+@media (width <= 48rem) {
+  .row {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    min-height: 0;
+    padding: 0.4rem 0.7rem;
+  }
+
+  .cursor,
+  .hint {
+    width: 100%;
+    text-align: left;
+    white-space: normal;
+  }
+}

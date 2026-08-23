@@ -1,0 +1,81 @@
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  background: #050607;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 450;
+  pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 45%, transparent 55%, rgb(0 0 0 / 35%) 100%),
+    linear-gradient(
+      180deg,
+      rgb(0 0 0 / 22%) 0%,
+      transparent 18%,
+      transparent 82%,
+      rgb(0 0 0 / 28%) 100%
+    );
+}
+
+.basemap-streets .vignette {
+  background: radial-gradient(120% 90% at 50% 45%, transparent 62%, rgb(0 0 0 / 12%) 100%),
+    linear-gradient(
+      180deg,
+      rgb(0 0 0 / 8%) 0%,
+      transparent 16%,
+      transparent 84%,
+      rgb(0 0 0 / 10%) 100%
+    );
+}
+
+.tools-stack {
+  position: absolute;
+  z-index: 540;
+  top: var(--space-4);
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: center;
+  max-width: calc(100% - 2rem);
+  transform: translateX(-50%);
+}
+
+@media (width <= 720px) {
+  .tools-stack {
+    top: 3.6rem;
+    left: var(--space-3);
+    right: var(--space-3);
+    max-width: none;
+    transform: none;
+  }
+}
+
+.panel {
+  position: relative;
+  z-index: 460;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  padding: var(--space-6);
+}
+
+.status-hidden :global(.horizon-map .leaflet-control-scale),
+.status-hidden :global(.horizon-map .leaflet-control-attribution) {
+  margin-bottom: 0.85rem;
+}
+
+.planner-open :global(.horizon-map) {
+  z-index: 1;
+}
+
+.planner-open :global(.horizon-map .leaflet-top),
+.planner-open :global(.horizon-map .leaflet-bottom) {
+  z-index: 1;
+}

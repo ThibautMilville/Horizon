@@ -1,0 +1,33 @@
+query FleetMap {
+  allSatellites {
+    id
+    name
+    status
+    coordinates
+    tle
+  }
+  allGroundStations {
+    id
+    name
+    status
+    coordinates
+  }
+}
+
+query MapContactPlannerData {
+  allEmployees {
+    id
+    name
+  }
+  allPayloads {
+    id
+    name
+    satellite_id
+  }
+  allContacts {
+    id
+    date
+    satellite_id
+    groundStation_id
+  }
+}
