@@ -1,0 +1,17 @@
+export const fleet_fr = {
+  "fleet.title": "Conscience de flotte",
+  "fleet.description": "Ce qui demande attention sur la flotte, les stations et les rapports ops.",
+  "fleet.loadFailed": "Impossible de charger l'état de la flotte",
+  "fleet.attention": "Attention",
+  "fleet.attentionQueue": "File d'attention",
+  "fleet.noAttention": "Aucun élément à surveiller.",
+  "fleet.searchAttention": "Rechercher dans l'attention...",
+  "fleet.inOrbit": "En orbite",
+  "fleet.stationsOnline": "Stations en ligne",
+  "fleet.payloadsActive": "Charges utiles actives",
+  "fleet.contactsUpcoming": "Contacts à venir",
+  "fleet.fleetReadiness": "Disponibilité de la flotte",
+  "fleet.fleetReadinessChartLabel": "Nombre de satellites par statut opérationnel",
+  "fleet.groundSegmentHealth": "Santé du segment sol",
+  "fleet.groundSegmentChartLabel": "Statuts des stations sol empilés par fournisseur réseau",
+} as const;

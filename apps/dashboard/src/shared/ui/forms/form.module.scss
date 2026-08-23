@@ -1,0 +1,52 @@
+.form {
+  display: grid;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.field {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.label-row {
+  display: inline-flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.label {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.error {
+  margin: 0;
+  color: var(--color-danger);
+  font-size: 0.9rem;
+}
+
+.span {
+  grid-column: 1 / -1;
+}
+
+@media (width >= 48rem) {
+  .form {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .span,
+  .actions,
+  .error {
+    grid-column: 1 / -1;
+  }
+}

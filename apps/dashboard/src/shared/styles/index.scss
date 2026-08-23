@@ -1,0 +1,9 @@
+@use "tokens";
+@use "reset";
+@use "scrollbars";
+
+.auth-route-fallback {
+  width: 100%;
+  min-height: 100%;
+  background: var(--color-bg);
+}

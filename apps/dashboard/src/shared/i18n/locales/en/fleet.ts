@@ -1,0 +1,17 @@
+export const fleet_en = {
+  "fleet.title": "Fleet awareness",
+  "fleet.description": "What needs attention across the fleet, stations, and ops reports.",
+  "fleet.loadFailed": "Could not load fleet status",
+  "fleet.attention": "Attention",
+  "fleet.attentionQueue": "Attention queue",
+  "fleet.noAttention": "No attention items.",
+  "fleet.searchAttention": "Search attention...",
+  "fleet.inOrbit": "In orbit",
+  "fleet.stationsOnline": "Stations online",
+  "fleet.payloadsActive": "Active payloads",
+  "fleet.contactsUpcoming": "Upcoming contacts",
+  "fleet.fleetReadiness": "Fleet readiness",
+  "fleet.fleetReadinessChartLabel": "Satellite count by operational status",
+  "fleet.groundSegmentHealth": "Ground segment health",
+  "fleet.groundSegmentChartLabel": "Ground-station status counts stacked by network provider",
+} as const;

@@ -1,0 +1,17 @@
+export const payloads_fr = {
+  "payloads.title": "Charges utiles",
+  "payloads.description": "Filtrez les charges utiles par statut, satellite ou client.",
+  "payloads.filterAria": "Statut charge utile",
+  "payloads.loadFailed": "Impossible de charger les charges utiles",
+  "payloads.emptyFilter": "Aucune charge utile ne correspond à ces filtres.",
+  "payloads.search": "Rechercher des charges utiles...",
+  "payloads.allSatellites": "Tous les satellites",
+  "payloads.allCustomers": "Tous les clients",
+  "payloads.fallbackTitle": "Charge utile",
+  "payloads.fallbackDescription": "Détail charge utile depuis l'API GraphQL flotte.",
+  "payloads.detailLoadFailed": "Impossible de charger la charge utile",
+  "payloads.notFound": "Charge utile introuvable.",
+  "payloads.missingId": "Identifiant charge utile manquant.",
+  "payloads.noConfig": "Aucune clé de configuration.",
+  "payloads.searchConfig": "Rechercher la configuration...",
+} as const;

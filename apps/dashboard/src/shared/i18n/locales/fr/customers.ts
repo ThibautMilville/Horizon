@@ -1,0 +1,15 @@
+export const customers_fr = {
+  "customers.title": "Clients",
+  "customers.description": "Clients mission et leurs représentants employés.",
+  "customers.loadFailed": "Impossible de charger les clients",
+  "customers.empty": "Aucun client trouvé.",
+  "customers.search": "Rechercher des clients...",
+  "customers.fallbackTitle": "Client",
+  "customers.detailDescription": "Profil client, représentant employé et charges utiles détenues.",
+  "customers.detailLoadFailed": "Impossible de charger le client",
+  "customers.notFound": "Client introuvable.",
+  "customers.missingId": "Identifiant client manquant.",
+  "customers.noRepresentative": "Aucun représentant employé lié.",
+  "customers.noPayloads": "Aucune charge utile pour ce client.",
+  "customers.payloads": "Charges utiles",
+} as const;

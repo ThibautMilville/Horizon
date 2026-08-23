@@ -14,5 +14,12 @@
     "noEmit": true
   },
   "include": ["."],
-  "exclude": ["./**/__tests__", "./**/__mocks__", "./**/*.spec.ts"]
+  "exclude": [
+    "./test",
+    "./**/__tests__",
+    "./**/__mocks__",
+    "./**/*.spec.ts",
+    "./**/*.test.ts",
+    "./**/*.test.tsx"
+  ]
 }

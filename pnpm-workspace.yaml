@@ -1,2 +1,7 @@
 packages:
   - "apps/*"
+
+peerDependencyRules:
+  allowedVersions:
+    "@mui/material": "9"
+    "@mui/system": "9"

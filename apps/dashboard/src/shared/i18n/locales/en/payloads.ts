@@ -1,0 +1,17 @@
+export const payloads_en = {
+  "payloads.title": "Payloads",
+  "payloads.description": "Filter payloads by status, satellite, or customer.",
+  "payloads.filterAria": "Payload status",
+  "payloads.loadFailed": "Could not load payloads",
+  "payloads.emptyFilter": "No payloads match these filters.",
+  "payloads.search": "Search payloads...",
+  "payloads.allSatellites": "All satellites",
+  "payloads.allCustomers": "All customers",
+  "payloads.fallbackTitle": "Payload",
+  "payloads.fallbackDescription": "Payload detail from the fleet GraphQL API.",
+  "payloads.detailLoadFailed": "Could not load payload",
+  "payloads.notFound": "Payload not found.",
+  "payloads.missingId": "Missing payload id.",
+  "payloads.noConfig": "No configuration keys.",
+  "payloads.searchConfig": "Search configuration...",
+} as const;

@@ -3,6 +3,7 @@
   "name": "@loft/horizon",
   "description": "Horizon - web application for managing a satellite company fleet.",
   "version": "0.0.0",
+  "type": "module",
   "workspaces": [
     "apps/*"
   ],
@@ -14,8 +15,9 @@
     "darwin",
     "linux"
   ],
-  "dependencies": {},
   "devDependencies": {
+    "@playwright/test": "1.62.1",
+    "@types/node": "20.14.10",
     "@vitest/coverage-v8": "2.0.4",
     "concurrently": "8.2.2",
     "turbo": "2.0.9",
@@ -23,12 +25,15 @@
     "vitest": "2.0.4"
   },
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "start": "turbo run start",
+    "lint": "pnpm --filter @horizon/dashboard lint",
+    "format:check": "pnpm --filter @horizon/dashboard format:check",
+    "stylelint": "pnpm --filter @horizon/dashboard stylelint",
     "test": "vitest run",
+    "test:e2e": "pnpm build && playwright test",
     "test:watch": "vitest watch",
-    "test:coverage": "pnpm run test -c vitest.report.config.ts"
+    "test:coverage": "pnpm --filter @horizon/dashboard exec vitest run --config vite.config.ts --coverage && pnpm --filter @horizon/server exec vitest run --config vitest.config.ts"
   }
 }

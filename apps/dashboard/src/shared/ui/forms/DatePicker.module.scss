@@ -1,0 +1,325 @@
+.root {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.trigger {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 2.5rem;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.875rem;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.trigger:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.trigger:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.trigger:hover:not(:disabled) {
+  border-color: var(--color-hairline-strong);
+  background: var(--color-surface);
+}
+
+.trigger-open {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-accent-glow);
+}
+
+.value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.placeholder {
+  color: var(--color-text-muted);
+}
+
+.glyph {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+}
+
+.menu {
+  z-index: 1400;
+  display: grid;
+  gap: var(--space-3);
+  overflow: auto;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-float);
+}
+
+.menu-compact {
+  padding: var(--space-3) var(--space-3) calc(var(--space-3) + env(safe-area-inset-bottom, 0));
+  border-radius: var(--radius-md);
+}
+
+.toolbar {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr) 2.25rem;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.nav {
+  display: inline-flex;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.nav:hover {
+  border-color: var(--color-border);
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+}
+
+.captions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.caption {
+  min-height: 2.25rem;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.caption:hover {
+  border-color: var(--color-border);
+  background: var(--color-surface-hover);
+}
+
+.caption-strong {
+  border-color: var(--color-accent-mid);
+  background: var(--color-accent-soft);
+}
+
+.weekdays,
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.25rem;
+}
+
+.weekday {
+  padding: 0.2rem 0;
+  color: var(--color-text-muted);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.blank {
+  min-height: 2.35rem;
+}
+
+.day {
+  min-height: 2.35rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.day:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+}
+
+.day-today:not(.day-selected) {
+  border-color: var(--color-accent-mid);
+  color: var(--color-accent-hover);
+  font-weight: 600;
+}
+
+.day-selected {
+  border-color: var(--color-accent);
+  background: var(--color-overlay-border);
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.day-disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.picker-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.chip {
+  min-height: 2.6rem;
+  padding: 0.45rem 0.5rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chip:hover {
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.chip-active {
+  border-color: var(--color-accent-mid);
+  background: var(--color-accent-glow);
+  color: var(--color-text);
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: end;
+  justify-content: space-between;
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-border);
+}
+
+.time-row {
+  display: flex;
+  flex: 1 1 12rem;
+  gap: var(--space-2);
+  align-items: end;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.time-field {
+  display: grid;
+  flex: 1;
+  gap: 0.3rem;
+  min-width: 0;
+  color: var(--color-text-muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.time-input {
+  width: 100%;
+  min-height: 2.25rem;
+  padding: 0.4rem 0.65rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.875rem;
+  color-scheme: dark light;
+  caret-color: var(--color-accent);
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.time-input:focus,
+.time-input:focus-visible {
+  border-color: var(--color-accent);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-accent-soft);
+}
+
+.confirm {
+  min-height: 2.25rem;
+  padding: 0.4rem 0.9rem;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.confirm:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.confirm:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+}
+
+@media (width <= 560px) {
+  .day,
+  .blank {
+    min-height: 2.75rem;
+  }
+
+  .chip {
+    min-height: 2.9rem;
+  }
+
+  .footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .time-row {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .confirm {
+    flex: 0 0 auto;
+  }
+}

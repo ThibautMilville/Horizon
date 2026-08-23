@@ -1,0 +1,15 @@
+export const customers_en = {
+  "customers.title": "Customers",
+  "customers.description": "Mission customers and their employee representatives.",
+  "customers.loadFailed": "Could not load customers",
+  "customers.empty": "No customers found.",
+  "customers.search": "Search customers...",
+  "customers.fallbackTitle": "Customer",
+  "customers.detailDescription": "Customer profile, employee representative, and owned payloads.",
+  "customers.detailLoadFailed": "Could not load customer",
+  "customers.notFound": "Customer not found.",
+  "customers.missingId": "Missing customer id.",
+  "customers.noRepresentative": "No employee representative linked.",
+  "customers.noPayloads": "No payloads for this customer.",
+  "customers.payloads": "Payloads",
+} as const;

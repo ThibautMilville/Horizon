@@ -1,10 +1,9 @@
 import path from "node:path";
 import react from "@vitejs/plugin-react";
-import {splitVendorChunkPlugin} from "vite";
 import {defineConfig} from "vitest/config";
 
 export default defineConfig({
-  plugins: [react(), splitVendorChunkPlugin()],
+  plugins: [react()],
 
   root: path.resolve(__dirname, "./src"),
 
@@ -25,6 +24,7 @@ export default defineConfig({
       },
     },
     assetsInlineLimit: 0,
+    chunkSizeWarningLimit: 850,
   },
 
   server: {
@@ -44,6 +44,28 @@ export default defineConfig({
   },
 
   test: {
+    coverage: {
+      all: true,
+      provider: "v8",
+      include: ["**/*.{ts,tsx}"],
+      exclude: [
+        "**/*.d.ts",
+        "**/*.test.{ts,tsx}",
+        "**/shared/graphql.ts",
+        "**/test/**",
+        "**/*.{config,*rc}.*",
+      ],
+      reporter: ["text", "cobertura"],
+      reportsDirectory: path.resolve(__dirname, "../../coverage"),
+      thresholds: {
+        statements: 40,
+        branches: 70,
+        functions: 60,
+        lines: 40,
+      },
+    },
     environment: "jsdom",
+    include: ["**/*.{test,spec}.{ts,tsx}"],
+    setupFiles: [path.resolve(__dirname, "./src/test/setup.ts")],
   },
 });

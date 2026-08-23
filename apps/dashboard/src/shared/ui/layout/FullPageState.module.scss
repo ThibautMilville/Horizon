@@ -1,0 +1,107 @@
+.page {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 100%;
+  padding: max(var(--space-4), env(safe-area-inset-top, 0px))
+    max(var(--space-4), env(safe-area-inset-right, 0px))
+    max(var(--space-4), env(safe-area-inset-bottom, 0px))
+    max(var(--space-4), env(safe-area-inset-left, 0px));
+  overflow: hidden;
+  background: radial-gradient(900px 520px at 18% 12%, var(--color-accent-glow), transparent 58%),
+    radial-gradient(760px 480px at 86% 78%, var(--color-accent-soft), transparent 55%),
+    var(--color-bg);
+  background-size:
+    140% 140%,
+    140% 140%,
+    100% 100%;
+  animation: status-wash 18s ease-in-out infinite alternate;
+}
+
+.page-error {
+  background: radial-gradient(
+      900px 520px at 18% 12%,
+      color-mix(in srgb, var(--color-danger) 24%, transparent),
+      transparent 58%
+    ),
+    radial-gradient(760px 480px at 86% 78%, var(--color-accent-soft), transparent 55%),
+    var(--color-bg);
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--space-4);
+  width: min(100%, 28rem);
+  padding: var(--space-6);
+  border: 1px solid var(--color-accent-soft);
+  border-radius: var(--radius-md);
+  background: var(--color-overlay);
+  box-shadow: var(--shadow-float);
+  backdrop-filter: blur(12px);
+}
+
+.page-error .card {
+  border-color: color-mix(in srgb, var(--color-danger) 36%, var(--color-accent-soft));
+}
+
+.brand {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.brand-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.code {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.description {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+@keyframes status-wash {
+  from {
+    background-position:
+      0% 20%,
+      100% 80%,
+      0 0;
+  }
+
+  to {
+    background-position:
+      30% 40%,
+      70% 50%,
+      0 0;
+  }
+}
