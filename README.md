@@ -1,98 +1,248 @@
-# Loft FE Coding Challenge
+# Horizon
 
-## Challenge description
-
-Your mission, should you choose to accept it, is to build a front-end web application based on a custom GraphQL API. The API exposes information about a company, like Loft Orbital, that licenses ride-share missions to organizations.
-
-Here's some insider information on the satellite company's business practices...
-
-The satellite company's customers provide payloads that are integrated into the satellite bus and then launched into space via a third party like SpaceX. A satellite can support many payloads across a variety of customers. Multiple satellites and their payloads can even work in tandem to achieve some common goal; this concept is called a "constellation". Customers can then request that a representative of the satellite company make contact with the satellite to execute some task with their payloads. Contact with the satellite is achieved by directing contracted ground stations to communicate with the satellite via a large antennae array. Satellite employees also often need to make contact with a satellite for general maintenancing tasks. Satellite company employees can create reports and comment about ongoing events with the satellites and/or ground stations.
-
-**Your objective is to provide a user-friendly application with a variety of interesting features that allows the satellite company to help manage it's fleet of space assets.** This is a creative exercise, so there are no specific features that are explicitly required and you are encouraged to make any technical assumptions on your own. Just make sure to document your decisions!
-
-We understand that this is a large task, which is why this is the only technical challenge for our interview process. There are no whiteboard problems and no in person quizzes! We'll just walk through your submission and talk about your code and decisions made along the way.
-
-## Requirements
-
-These are requirements that we must have in a submission. Consider the following mission critical items.
-
-- Create a web application with good UI/UX. The more creative, the better!
-- The web app must be created using Vue or React.
-- Stay away from plain JavaScript, only use if absolutely necessary. Favor using TypeScript.
-- Include tests for the business logic parts of your application. A basic Vitest configuration is already provided.
-- Make sure your application runs and fix any bugs you may find.
-- Use the provided custom GraphQL API schema.
-- Update the `README's` within this template to detail the chosen solution and how to run it.
-- Include a `WORK_SUMMARY.md` file at the root of your submission to detail what you did and how. Include any details that you may think are important for us to know about, especially any changes that you might have made to this project template.
-
-## AI Usage Policy
-
-- In your README, include a short section on if and how you used AI tools to solve the challenge.
-- You can use AI to assist, but the core logic, architecture, and key design decisions should be your own work, not fully agent-generated.
-
-## Recommendations
-
-These are opportunities to show your technical expertise. They are not required, but we do give bonus points to those who can create a submission with the following.
-
-- Use other technology or APIs to make your project creative and feature rich.
-- Use state management for your application and/or discuss your approach to state management in a front-end application.
-- Use a component library of your choice.
-- Add error handling to your API requests.
-- Prefer use of SCSS or plain CSS over Tailwind or other predefined classes. It's easier to evaluate CSS skills this way!
-- Make your web application a [SPA](https://developer.mozilla.org/en-US/docs/Glossary/SPA) using `vue-router` or `react-router` or another equivalent package.
-- Use [Codegen](https://the-guild.dev/graphql/codegen) to generate typed GraphQL schema definitions/queries/mutations for use in the client.
-- Use [Apollo](https://www.apollographql.com/docs/#for-client-developers), [urql](https://github.com/urql-graphql/urql), or some equivalent for requesting and caching data in the client.
-- Use linting and formatting tools like [ESLint](https://eslint.org/), [Stylelint](https://stylelint.io/), and [Prettier](https://prettier.io/) to ensure your code is free of code smells and has consistent formatting.
-- Modify the Makefiles, Dockerfiles, and dashboard build process to additionally provide a runnable production-ready image.
-- Set up a CI pipeline for unit testing (GitLab CI, Travis CI, Circle CI, etc).
-
-## Not recommended
-
-These are things we are not necessarily looking for (but would enjoy to see) because we realize that it would take a lot of time to implement.
-
-- Don't put a lot of effort into accessibility. The UI/UX should only be reasonably accessible, i.e. don't put white text on a white background, but also don't spend time trying to make you application screen-reader accessible.
-- Don't feel like you need to make changes to the server and API schema. Only do so if you think it will help improve the quality of your project.
-- Don't worry about implementing best practicies around authentication and authorization in your app's feature set.
+Horizon is a React and TypeScript operations console for managing a satellite company's fleet,
+constellations, payloads, ground stations, contacts, reports, and customers through the provided
+GraphQL API.
 
 ## Architecture
 
-Nothing about this project setup needs to be used unless mentioned in the `requirements` section above!
+The monorepo keeps the provided GraphQL server and a Vite React SPA side by side:
 
-We have already provided:
+```text
+apps/
+  server/                 GraphQL API and in-memory seed data (template)
+  dashboard/src/
+    app/                  Router, shell, Apollo bootstrap, auth gate
+    features/
+      auth/               Demo sign-in, profile, session
+      map/                Fleet map (components /, hooks /, lib /)
+      fleet/              Fleet awareness dashboard
+      constellations/     Constellation readiness overview
+      satellites/         Satellite list and detail
+      payloads/           Payload list and detail
+      stations/           Ground-station list and detail
+      contacts/           Pass list, schedule, detail + autosave
+      reports/            Ops reports and comments
+      customers/          Customer list and detail
+      search/             Cross-entity search (Ctrl/Cmd + K)
+      space-weather/      Optional NOAA Kp advisory card
+    shared/
+      ui/                 Design system by responsibility
+      lib/                Cross-feature pure helpers
+      hooks/              Shared React adapters
+      i18n/ + preferences Operator language, theme, motion
+      graphql/            Shared GraphQL documents
+    test/                 Shared Vitest helpers and integration tests
+```
 
-- the API server code for you in the `apps/server` directory
-- a simple boilerplate web application at `apps/dashboard`
-- a `Makefile` for easy startup
-- a `Dockerfile` to make the developer environment consistent
-- basic testing configuration using Vitest and JSDom
-- basic linting and formatting configurations using ESLint and Prettier
+Feature-oriented layout: each domain owns its routes, pages, `.graphql` documents, hooks, and
+domain helpers. `app/` only composes the shell and router. `shared/` holds reusable UI and pure
+rules used by more than one feature. The map is the only feature split into `components`, `hooks`,
+and `lib` because of its size.
 
-Feel free to use all of this as a starting point for your submission.
+State stays simple on purpose:
 
-## Getting started with this template
+- Apollo Client owns remote GraphQL data and cache.
+- URL search params own shareable list filters and map selection.
+- Local React state covers transient UI.
+- `localStorage` persists operator preferences and the demo session.
 
-1. Install [pnpm](https://pnpm.io/). See [here](https://pnpm.io/installation) for instructions.
-2. Make sure you have [Docker](https://www.docker.com/) installed. See [here](https://docs.docker.com/engine/install/) for instructions.
-3. Start the Docker development environment using `make dev`.
-4. Install dependencies using `pnpm install`.
+No global client store is required for the current scope.
 
-## Common problems
+### Product behavior worth noting
 
-- `ERR_PNPM_ENOENT  ENOENT: no such file or directory` --> `pnpm` is getting symlinks confused. Try running `pnpm config set store-dir ~/pnpm` from inside the Docker container to reset your cached dependencies. See more [here](https://github.com/pnpm/pnpm/issues/3952).
+- Map search (`Ctrl/Cmd + K`) covers satellites, stations, payloads, customers, contacts, and
+  reports. Mapped assets focus on the map; other hits open detail routes.
+- The contact planner predicts station visibility from the supplied TLEs for the next 24 hours
+  (5° minimum elevation, one-minute sampling, 15-minute conflict window). Demo only - not
+  flight-certified ephemeris.
+- Contact create/autosave runs an advisory command-safety review before dangerous scripts are
+  persisted.
+- Fleet reads the public NOAA planetary K-index as optional space-weather context (no API key,
+  refresh at most every five minutes).
 
-## Questions?
+## Application pages
 
-Just reach out!
+Screens below were captured from the running console (`make dev`, dark theme).
 
-## Next steps
+### Sign in
 
-It's time to submit!
+Demo gate for the operator console. Credentials: `Commander` / `commander`.
 
-But before you do that...
+![Sign in](docs/screenshots/login.jpg)
 
-1. Ensure you meet all the requirements listed above.
-2. Make sure your code runs in `dev` mode and builds without errors. See project `README.md` for more details.
-3. Check your code for bugs, formatting inconsistencies, and code smells.
-4. Remove all temporary files from your submission. Please refrain from submitting build ouput, installed dependencies, etc. This can mostly be handled by running `make clean` from the project root.
+### Forgot password
 
-When you are done, please push your solution on a private GitLab or private GitHub repository (or in a zip and send it by email) and email us. We will then plan a short call so you can drive us through your solution.
+Demo recovery screen that explains how password reset would work without calling a real mailer.
+
+![Forgot password](docs/screenshots/forgot-password.jpg)
+
+### Map
+
+Immersive fleet map: satellites, ground stations, ground tracks, day/night terminator, asset
+search, and the contact planner panel.
+
+![Map](docs/screenshots/map.jpg)
+
+### Fleet
+
+Live awareness board: readiness metrics, ground-segment health, NOAA Kp context, and an attention
+queue across the fleet.
+
+![Fleet](docs/screenshots/fleet.jpg)
+
+### Constellations
+
+Mission-level readiness per constellation, with in-orbit satellites and active payload counts.
+
+![Constellations](docs/screenshots/constellations.jpg)
+
+### Payloads
+
+Catalog of customer payloads on the fleet, with links into identity and owning satellites.
+
+![Payloads](docs/screenshots/payloads.jpg)
+
+![Payload detail](docs/screenshots/payload-detail.jpg)
+
+### Satellites
+
+Fleet inventory with status and orbit context; detail shows identity, position, and payloads.
+
+![Satellites](docs/screenshots/satellites.jpg)
+
+![Satellite detail](docs/screenshots/satellite-detail.jpg)
+
+### Stations
+
+Ground-segment directory and station detail for contracted antenna sites.
+
+![Stations](docs/screenshots/stations.jpg)
+
+![Station detail](docs/screenshots/station-detail.jpg)
+
+### Contacts
+
+Past and upcoming satellite passes. Operators schedule new contacts, edit with autosave, and review
+command safety before commit.
+
+![Contacts](docs/screenshots/contacts.jpg)
+
+![Schedule contact](docs/screenshots/contact-schedule.jpg)
+
+![Contact detail](docs/screenshots/contact-detail.jpg)
+
+### Reports
+
+Ops follow-up reports and threaded comments against satellites and/or ground stations.
+
+![Reports](docs/screenshots/reports.jpg)
+
+![Create report](docs/screenshots/report-create.jpg)
+
+![Report detail](docs/screenshots/report-detail.jpg)
+
+### Customers
+
+Mission customers and their employee representatives, with owned payloads on detail.
+
+![Customers](docs/screenshots/customers.jpg)
+
+![Customer detail](docs/screenshots/customer-detail.jpg)
+
+### Profile
+
+Demo operator profile and preference controls (language, theme, text scale, motion).
+
+![Profile](docs/screenshots/profile.jpg)
+
+## Tech stack
+
+- [pnpm](https://pnpm.io/) and [Turbo](https://turbo.build/repo)
+- React, Apollo Client, GraphQL Codegen, Recharts, SCSS (see `apps/dashboard/README.md`)
+- [Vitest](https://vitest.dev/) for unit and integration tests
+- Playwright for the critical production browser flow
+
+## Scripts
+
+**Makefile**
+
+- `make help` --> Show a more detailed version of available Makefile commands
+- `make dev` --> Start your development environment
+- `make prod-image` --> Build the production image (API + dashboard static, target `prod`)
+- `make prod-run` --> Build and run the production image on port 3000
+- `make clean` --> Remove temporary files like installed modules and build output, resets the dev environment
+
+**Package.json**
+
+- `pnpm build` --> Runs the `build` script in all workspaces
+- `pnpm dev` --> Runs the `dev` script in all workspaces
+- `pnpm start` --> Runs the `start` script in all workspaces
+- `pnpm lint` --> ESLint on the dashboard
+- `pnpm format:check` --> Prettier check on the dashboard
+- `pnpm stylelint` --> Stylelint on the dashboard
+- `pnpm test` --> Runs tests
+- `pnpm test:e2e` --> Builds the application and runs the Chromium end-to-end test
+- `pnpm test:watch` --> Runs tests in watch mode
+- `pnpm test:coverage` --> Runs tests and collects coverage
+
+## Local setup
+
+```bash
+pnpm install --frozen-lockfile
+make dev
+```
+
+Then open `http://localhost:8080` and sign in with `Commander` / `commander`. The API and GraphiQL
+run at `http://localhost:3000/graphql`.
+
+The services run in the background. Use `make logs` to follow their output, `make exec` to open a
+shell in the development container, and `make down` to stop the environment.
+
+To run the dashboard and API without the development container, use the workspace commands in
+`apps/dashboard/README.md` and `apps/server/README.md`.
+
+To refresh README screenshots against a running `make dev` environment:
+
+```bash
+pnpm exec node scripts/capture-readme-screens.mjs
+```
+
+## Quality checks
+
+```bash
+pnpm test
+pnpm test:coverage
+pnpm build
+pnpm lint
+pnpm format:check
+pnpm stylelint
+pnpm exec playwright install chromium
+pnpm test:e2e
+```
+
+Unit tests focus on business rules and pure transformations. Integration tests cover the auth gate,
+login redirect, Apollo loading/error states, contact autosave concurrency, the custom date picker,
+Leaflet marker interaction, map search, pass calculation, command-safety rules, constellation
+aggregation, NOAA response parsing, and contact/report/comment mutations. The server
+fallback is verified in Node and Playwright exercises the production SPA, asset search, live fleet
+dashboard, map selection, and light theme in Chromium.
+Generated GraphQL types are excluded from coverage because they contain no authored behavior.
+Coverage is enforced at 40% statements/lines, 70% branches, and 60% functions; these are regression
+floors, not targets.
+
+## Production
+
+`make prod-image` builds the dashboard and server into the Docker `prod` target. `make prod-run`
+serves the SPA and GraphQL endpoint together on port 3000. Override `VITE_GRAPHQL_URI` when the API
+is hosted on another origin.
+
+The original exercise statement is preserved in `CHALLENGE.md`. Implementation details and template
+changes are documented in `WORK_SUMMARY.md`.
+
+## AI usage
+
+An AI coding assistant was used for review, refactoring suggestions, implementation support, and test
+scaffolding. The author selected the product scope and architecture, reviewed the changes, validated
+the quality gates, and remains responsible for the submitted solution. GraphQL fields come only from
+the provided schema.

@@ -11,13 +11,16 @@
     "uuid": "10.0.0"
   },
   "devDependencies": {
+    "@types/cors": "2.8.19",
     "@types/express": "^4.17.21",
+    "@types/uuid": "10.0.0",
     "esbuild": "0.23.0",
     "nodemon": "3.1.4"
   },
   "scripts": {
-    "build": "esbuild ./src/*.ts --platform=node --format=esm --color=true --outdir=./dist",
+    "build": "pnpm type-check && esbuild ./src/index.ts ./src/app.ts ./src/db.ts --platform=node --format=esm --color=true --outdir=./dist",
     "dev": "pnpm build && concurrently --names 'build,nodemon' --prefix-colors 'yellow,cyan' 'pnpm build --watch' 'nodemon'",
-    "start": "node ./dist/index.js"
+    "start": "node ./dist/index.js",
+    "type-check": "tsc --project ./tsconfig.json"
   }
 }

@@ -1,17 +1,5 @@
-/* Imports ////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+import { createServerApp } from "./app.js";
 
-import cors from "cors";
-import express from "express";
-import jsonGraphqlExpress from "json-graphql-server/node";
+const port = Number(process.env.PORT ?? 3000);
 
-import db from "./db.js";
-
-/* Server /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
-
-const app = express();
-
-app.use(cors());
-
-app.use("/graphql", jsonGraphqlExpress(db));
-
-app.listen(3000);
+createServerApp({ staticRoot: process.env.STATIC_ROOT }).listen(port);

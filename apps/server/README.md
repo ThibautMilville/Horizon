@@ -4,6 +4,14 @@ A server that exposes a custom GraphQL API for use in your project. You should *
 
 You can access the API by sending HTTP `GET` or `POST` requests to `localhost:3000/graphql`. You can view a [GraphiQL](https://www.gatsbyjs.com/docs/how-to/querying-data/running-queries-with-graphiql/) playground by visiting `localhost:3000/graphql` in your browser.
 
+Optional environment variables:
+
+- `PORT` --> listen port (default `3000`)
+- `STATIC_ROOT` --> if set, serves that directory as the SPA (used by the production Docker image)
+
+`createServerApp` keeps construction separate from process startup so the production SPA fallback can
+be integration-tested. The supplied schema and data remain unchanged.
+
 Note that the [JSON GraphQL Server](https://github.com/marmelab/json-graphql-server) middleware uses [graphql-http](https://github.com/graphql/graphql-http) under the hood. Please refer to their documentations for details about passing variables, etc.
 
 ## Schema

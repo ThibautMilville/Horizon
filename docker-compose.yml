@@ -11,7 +11,7 @@ services:
     volumes:
       - ./:/workspace:delegated
     working_dir: /workspace
-    command: '/bin/bash -c "trap : TERM INT; sleep infinity & wait"'
+    command: pnpm dev
 
 networks:
   default:

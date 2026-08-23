@@ -1,4 +1,5 @@
 project_name := horizon
+service_name := loft-horizon
 
 image_base := loft-orbital/$(project_name)
 dev_image_url := $(image_base)/dev
@@ -6,7 +7,7 @@ prod_image_url := $(image_base)/prod
 
 # Development Image ////////////////////////////////////////////////////////////////////////////////////////////////// #
 
-dev: dev-image up exec ## Build and start development environment
+dev: dev-image up ## Build and start development environment
 .PHONY: dev
 
 dev-image: ## Build development image
@@ -17,6 +18,18 @@ dev-image: ## Build development image
 		--tag=$(dev_image_url) \
 		.
 .PHONY: dev-image
+
+prod-image: ## Build production image (API + dashboard static)
+	docker build \
+		--target=prod \
+		--build-arg=VITE_GRAPHQL_URI=$(or $(VITE_GRAPHQL_URI),/graphql) \
+		--tag=$(prod_image_url) \
+		.
+.PHONY: prod-image
+
+prod-run: prod-image ## Run production image on port 3000
+	docker run --rm -p 3000:3000 $(prod_image_url)
+.PHONY: prod-run
 
 up: ## Start development environment
 	docker network create loft || true
@@ -38,9 +51,16 @@ exec: up ## Execute shell within development environment
 		--project-name=$(project_name) \
 		--file="$(CURDIR)/docker-compose.yml" \
 		exec \
-		$(project_name) \
+		$(service_name) \
 		zsh
 .PHONY: exec
+
+logs: ## Follow development logs
+	docker compose \
+		--project-name=$(project_name) \
+		--file="$(CURDIR)/docker-compose.yml" \
+		logs -f
+.PHONY: logs
 
 # General //////////////////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -49,11 +69,12 @@ clean: ## Remove temporary files from the project
 	find . -type d -name "dist" -exec rm -rf {} +
 	find . -type d -name "node_modules" -exec rm -rf {} +
 	find . -type d -name ".pnpm-store" -exec rm -rf {} +
-	find . -type f -name "coverage" -exec rm -rf {} +
-	find . -type f -name "report" -exec rm -rf {} +
+	find . -type d -name "coverage" -exec rm -rf {} +
+	find . -type d -name "report" -exec rm -rf {} +
 	find . -type d -name ".turbo" -exec rm -rf {} +
+	find . -type d -name "playwright-report" -exec rm -rf {} +
+	find . -type d -name "test-results" -exec rm -rf {} +
 	find . -type f -name ".tsbuildinfo" -exec rm -rf {} +
-	pnpm config set store-dir ~/pnpm 
 .PHONY: clean
 
 help: ## Show help

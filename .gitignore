@@ -22,6 +22,8 @@ $RECYCLE.BIN/
 # Cursor
 
 .cursor/
+.agents/
+skills-lock.json
 
 # Visual Studio Code
 
@@ -76,6 +78,8 @@ coverage
 
 # Unit tests reports
 /report
+/playwright-report/
+/test-results/
 
 # Dependency directories
 .pnpm-store/
@@ -115,3 +119,11 @@ build/
 # Vite
 
 vite.config.ts.timestamp-*.mjs
+
+# Env
+
+.env*
+!.env.development
+!.env.example
+!**/.env.development
+!**/.env.example
