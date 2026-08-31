@@ -522,7 +522,7 @@ const customers: Customer[] = [
   },
   {
     id: uuid(),
-    name: "Micorsoft",
+    name: "Microsoft",
     email: "contact@microsoft.com",
     employee_id: employees[3].id,
   },
